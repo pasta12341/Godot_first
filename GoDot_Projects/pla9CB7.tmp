@@ -1,0 +1,132 @@
+[gd_scene load_steps=13 format=3 uid="uid://7jgy4r4jlpmj"]
+
+[ext_resource type="Script" path="res://CharacterBody3D.gd" id="1_agh16"]
+[ext_resource type="PackedScene" uid="uid://c1bmmwwnulg13" path="res://Weapons/knife.tscn" id="2_104lt"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_k7pcj"]
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cpgmj"]
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_g5506"]
+radius = 0.35
+height = 1.0
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_os3w5"]
+radius = 0.1
+height = 1.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_kga25"]
+radius = 0.1
+height = 0.2
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_qjv8i"]
+radius = 0.55
+height = 2.25
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_lugfp"]
+radius = 0.1
+height = 0.5
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_q5mrs"]
+radius = 0.1
+height = 0.5
+
+[sub_resource type="SphereMesh" id="SphereMesh_bhtjk"]
+radius = 0.025
+height = 0.05
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_jw580"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/sync = true
+properties/0/watch = false
+properties/1/path = NodePath(".:up_direction")
+properties/1/spawn = true
+properties/1/sync = true
+properties/1/watch = false
+
+[node name="Node3D" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.50471, 0)
+
+[node name="CharacterBody3D" type="CharacterBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3818, 0)
+script = ExtResource("1_agh16")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CharacterBody3D"]
+mesh = SubResource("SphereMesh_k7pcj")
+surface_material_override/0 = SubResource("StandardMaterial3D_cpgmj")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.75, 0, -0.702502, 0)
+mesh = SubResource("CapsuleMesh_g5506")
+
+[node name="CameraPivot" type="Node3D" parent="CharacterBody3D"]
+transform = Transform3D(0.993897, 0, 0.110307, 0, 1, 0, -0.110307, 0, 0.993897, 0.580233, -0.283448, 0)
+
+[node name="Camera3D" type="Camera3D" parent="CharacterBody3D/CameraPivot"]
+transform = Transform3D(1, 0, 7.10543e-15, 0, 1, 0, -7.10543e-15, 0, 1, 0.00538765, 0.329071, 2.36893)
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.439175, -0.772701, 0.00342876)
+mesh = SubResource("CapsuleMesh_os3w5")
+
+[node name="MeshInstance3D7" type="MeshInstance3D" parent="CharacterBody3D"]
+transform = Transform3D(3, 0, 0, 0, 1.5, 0, 0, 0, 1, 0.202577, -0.382503, 0)
+mesh = SubResource("SphereMesh_kga25")
+
+[node name="MeshInstance3D8" type="MeshInstance3D" parent="CharacterBody3D"]
+transform = Transform3D(3, 0, 0, 0, 1.5, 0, 0, 0, 1, -0.209142, -0.382503, 0)
+mesh = SubResource("SphereMesh_kga25")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.5, 0, -0.875017, 0)
+shape = SubResource("CapsuleShape3D_qjv8i")
+
+[node name="RightArmPivot" type="Node3D" parent="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.451507, -0.38302, 0)
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="CharacterBody3D/RightArmPivot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00605226, -0.19481, 0.00342876)
+mesh = SubResource("CapsuleMesh_lugfp")
+skeleton = NodePath("../..")
+
+[node name="RightElbowPivot" type="Node3D" parent="CharacterBody3D/RightArmPivot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.390434, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CharacterBody3D/RightArmPivot/RightElbowPivot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.194871, 0)
+mesh = SubResource("CapsuleMesh_q5mrs")
+
+[node name="Node3D" parent="CharacterBody3D/RightArmPivot/RightElbowPivot" instance=ExtResource("2_104lt")]
+transform = Transform3D(-1.19249e-09, 1.04251e-16, -0.1, -8.74228e-09, -0.1, 0, -0.1, 8.74228e-09, 1.19249e-09, 0, -0.662033, 0)
+
+[node name="LeftLegPivot" type="Node3D" parent="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.145906, -1.10472, 0)
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="CharacterBody3D/LeftLegPivot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00361329, -0.368542, 0.00342876)
+mesh = SubResource("CapsuleMesh_os3w5")
+skeleton = NodePath("../..")
+
+[node name="RightLegPivot" type="Node3D" parent="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.16675, -1.12556, 0)
+
+[node name="MeshInstance3D6" type="MeshInstance3D" parent="CharacterBody3D/RightLegPivot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000121772, -0.347698, 0.00342876)
+mesh = SubResource("CapsuleMesh_os3w5")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.110922, 0.0822973, -0.209468)
+mesh = SubResource("SphereMesh_bhtjk")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.107344, 0.0822973, -0.214232)
+mesh = SubResource("SphereMesh_bhtjk")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+root_path = NodePath("../CharacterBody3D")
+replication_config = SubResource("SceneReplicationConfig_jw580")

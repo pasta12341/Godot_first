@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=3 uid="uid://c5ghx1wsqbm78"]
+
+[ext_resource type="PackedScene" uid="uid://7jgy4r4jlpmj" path="res://node_3d.tscn" id="1_dnm7q"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_602eh"]
+size = Vector3(7.72605, 0.138685, 7.72761)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5y3ix"]
+albedo_color = Color(0.188235, 1, 0.160784, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_5wtp1"]
+material = SubResource("StandardMaterial3D_5y3ix")
+size = Vector3(7.72605, 0.138685, 7.72761)
+
+[node name="Node3D" type="Node3D"]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("BoxShape3D_602eh")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0310924, 0)
+mesh = SubResource("BoxMesh_5wtp1")
+skeleton = NodePath("../..")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-4.37114e-08, -0.258819, 0.965926, 0, 0.965926, 0.258819, -1, 1.13133e-08, -4.2222e-08, 5.318, 2.31585, 0.169135)
+
+[node name="Node3D" parent="." instance=ExtResource("1_dnm7q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.06805, 0)
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0697613, 0.563022, 3.8955)
+fov = 67.5

@@ -1,0 +1,52 @@
+[gd_scene load_steps=8 format=3 uid="uid://c5ghx1wsqbm78"]
+
+[ext_resource type="Script" path="res://node_ground.gd" id="1_tyana"]
+[ext_resource type="PackedScene" uid="uid://bl2r6ukm2dmca" path="res://tree.tscn" id="2_0vb82"]
+[ext_resource type="PackedScene" uid="uid://7jgy4r4jlpmj" path="res://player.tscn" id="2_81s2s"]
+[ext_resource type="PackedScene" uid="uid://b74b1idp3osih" path="res://game_gui.tscn" id="3_u5jnh"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jfya5"]
+albedo_color = Color(0.101961, 0.945098, 0.184314, 1)
+emission_energy_multiplier = 0.48
+normal_enabled = true
+normal_scale = 16.0
+subsurf_scatter_enabled = true
+grow_amount = -5.626
+
+[sub_resource type="BoxMesh" id="BoxMesh_e0ols"]
+material = SubResource("StandardMaterial3D_jfya5")
+size = Vector3(100, 2, 100)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_6ltvs"]
+data = PackedVector3Array(-50, 1, 50, 50, 1, 50, -50, -1, 50, 50, 1, 50, 50, -1, 50, -50, -1, 50, 50, 1, -50, -50, 1, -50, 50, -1, -50, -50, 1, -50, -50, -1, -50, 50, -1, -50, 50, 1, 50, 50, 1, -50, 50, -1, 50, 50, 1, -50, 50, -1, -50, 50, -1, 50, -50, 1, -50, -50, 1, 50, -50, -1, -50, -50, 1, 50, -50, -1, 50, -50, -1, -50, 50, 1, 50, -50, 1, 50, 50, 1, -50, -50, 1, 50, -50, 1, -50, 50, 1, -50, -50, -1, 50, 50, -1, 50, -50, -1, -50, 50, -1, 50, 50, -1, -50, -50, -1, -50)
+
+[node name="Node3D" type="Node3D"]
+script = ExtResource("1_tyana")
+player_scene = ExtResource("2_81s2s")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5.2671, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
+mesh = SubResource("BoxMesh_e0ols")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_6ltvs")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-3.21526e-08, -0.844748, 0.535164, -2.96125e-08, 0.535164, 0.844748, -1, 1.13133e-08, -4.2222e-08, 5.318, -0.325096, 0.169135)
+
+[node name="tree1" parent="." instance=ExtResource("2_0vb82")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.32746, -4.30708, 2.66511)
+
+[node name="tree2" parent="." instance=ExtResource("2_0vb82")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.72136, -4.29032, -1.23659)
+
+[node name="tree3" parent="." instance=ExtResource("2_0vb82")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.46218, -4.27945, -1.23877)
+
+[node name="Control" parent="." instance=ExtResource("3_u5jnh")]
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://player.tscn")
+spawn_path = NodePath("..")

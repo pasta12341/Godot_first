@@ -1,0 +1,39 @@
+[gd_scene load_steps=7 format=3 uid="uid://c1bmmwwnulg13"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_k8kgu"]
+albedo_color = Color(0.431373, 0.196078, 0.113725, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_v4821"]
+material = SubResource("StandardMaterial3D_k8kgu")
+radius = 0.6
+height = 3.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ygcfa"]
+albedo_color = Color(0.360784, 0.360784, 0.360784, 1)
+roughness = 0.5
+
+[sub_resource type="BoxMesh" id="BoxMesh_ebmf6"]
+material = SubResource("StandardMaterial3D_ygcfa")
+size = Vector3(1, 2, 0.1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1jm81"]
+albedo_color = Color(0.360784, 0.360784, 0.360784, 1)
+roughness = 0.49
+
+[sub_resource type="PrismMesh" id="PrismMesh_hcjc7"]
+material = SubResource("StandardMaterial3D_1jm81")
+left_to_right = 1.0
+size = Vector3(1, 1.5, 0.1)
+
+[node name="Node3D" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.86141, 0)
+mesh = SubResource("CapsuleMesh_v4821")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_ebmf6")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.74354, 0)
+mesh = SubResource("PrismMesh_hcjc7")
